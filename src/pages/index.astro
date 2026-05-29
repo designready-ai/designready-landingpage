@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import ActionLink from '../components/ActionLink.astro';
 import AtomIcon from '../components/illustrations/AtomIcon.astro';
 import MoleculeIcon from '../components/illustrations/MoleculeIcon.astro';
 import OrganismIcon from '../components/illustrations/OrganismIcon.astro';
@@ -14,20 +15,14 @@ import OrganismIcon from '../components/illustrations/OrganismIcon.astro';
 
 		<div class="flex flex-col gap-3 max-w-xl text-center text-text-muted leading-relaxed">
 			<p>
-				<span class="inline-flex items-baseline gap-2">
-					<a
-						href="https://github.com/designready-ai/designready-ai"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="underline underline-offset-4 decoration-1 hover:text-brand transition-colors"
-					>Open source</a>
-					<a
-						href="https://www.figma.com/community/plugin/1619643293052051000"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="underline underline-offset-4 decoration-1 hover:text-brand transition-colors"
-					>Figma plugin</a>
-				</span>.
+				<span class="inline-flex items-center gap-6">
+					<ActionLink href="https://github.com/designready-ai/designready-ai">
+						GitHub Repo
+					</ActionLink>
+					<ActionLink href="https://www.figma.com/community/plugin/1619643293052051000">
+						Figma plugin
+					</ActionLink>
+				</span>
 			</p>
 			<p>
 				Score your components across six dimensions<br class="hidden min-[481px]:inline" />
