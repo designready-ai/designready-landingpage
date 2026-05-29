@@ -1,0 +1,29 @@
+---
+---
+
+<button
+	id="theme-toggle"
+	type="button"
+	class="px-3 py-1.5 rounded-md border border-border bg-surface-raised text-text-muted hover:text-text hover:border-brand transition-colors text-sm font-medium"
+	aria-label="Toggle color theme"
+>
+	<span id="theme-label">…</span>
+</button>
+
+<script is:inline>
+	(() => {
+		const btn = document.getElementById('theme-toggle');
+		const label = document.getElementById('theme-label');
+		if (!btn || !label) return;
+		const render = () => {
+			label.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? 'Dark' : 'Light';
+		};
+		render();
+		btn.addEventListener('click', () => {
+			const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+			document.documentElement.setAttribute('data-theme', next);
+			localStorage.setItem('theme', next);
+			render();
+		});
+	})();
+</script>

@@ -1,0 +1,39 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+
+@theme {
+  /* ─── Brand (Plugin-konsistent) ─── */
+  --color-brand:        #18a0fb;
+  --color-success:      #1bc47d;
+  --color-warning:      #f5a623;
+  --color-error:        #f24822;
+
+  /* ─── Inhaltliche Farben (Plugin-Demos) ─── */
+  --color-atom:         #58a6ff;
+  --color-molecule:     #bc8cff;
+  --color-organism:     #f5a623;
+  --color-score-green:  #7ee787;
+  --color-score-yellow: #e0e040;
+  --color-score-red:    #f85149;
+  --color-variants:     #ff6b9d;
+
+  /* ─── Typography ─── */
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Monaco, monospace;
+
+  /* ─── Surfaces (Light = Default) ─── */
+  --color-surface:        #ffffff;
+  --color-surface-raised: #f6f8fa;
+  --color-border:         #d0d7de;
+  --color-text:           #0d1117;
+  --color-text-muted:     #6b7280;
+}
+
+/* ─── Dark Override ─── */
+[data-theme="dark"] {
+  --color-surface:        #0d1117;
+  --color-surface-raised: #161b22;
+  --color-border:         #30363d;
+  --color-text:           #e0e0e0;
+  --color-text-muted:     #8b949e;
+}

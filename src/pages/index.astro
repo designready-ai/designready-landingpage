@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import AtomIcon from '../components/icons/AtomIcon.astro';
+import MoleculeIcon from '../components/icons/MoleculeIcon.astro';
+import OrganismIcon from '../components/icons/OrganismIcon.astro';
+---
+
+<Base title="DesignReady">
+	<section class="min-h-screen flex flex-col items-center justify-center gap-10 px-6 py-24">
+		<h1 class="text-5xl md:text-6xl font-bold tracking-tight text-center max-w-2xl">
+			Make your design
+			<span class="block text-brand">AI-ready.</span>
+		</h1>
+
+		<div class="flex flex-col gap-3 max-w-xl text-center text-text-muted leading-relaxed">
+			<p>
+				<a
+					href="https://github.com/designready-ai/designready-ai"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="underline underline-offset-4 decoration-1 hover:text-brand transition-colors"
+				>Open source</a>
+				<a
+					href="https://www.figma.com/community/plugin/1619643293052051000"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="underline underline-offset-4 decoration-1 hover:text-brand transition-colors"
+				>Figma plugin</a>.
+			</p>
+			<p>
+				Score your components across six dimensions<br />
+				and fix the gaps before AI code generation.
+			</p>
+		</div>
+
+		<div class="flex items-center gap-6">
+			<span class="text-atom"><AtomIcon size={28} /></span>
+			<span class="text-molecule"><MoleculeIcon size={28} /></span>
+			<span class="text-organism"><OrganismIcon size={28} /></span>
+		</div>
+	</section>
+</Base>
