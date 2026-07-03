@@ -1,0 +1,69 @@
+---
+/**
+ * Privacy — the offline USP. No API keys, no accounts, no network.
+ */
+import { Icon } from 'astro-icon/components';
+
+interface Point {
+	title: string;
+	body: string;
+	icon: string;
+}
+
+const POINTS: Point[] = [
+	{
+		title: 'No API keys',
+		body: 'Nothing to configure and no secrets to manage. The plugin does the work on its own.',
+		icon: 'lucide:key-round',
+	},
+	{
+		title: 'No accounts',
+		body: 'No sign-up and no login. Open the plugin and start scoring.',
+		icon: 'lucide:user-round-x',
+	},
+	{
+		title: 'No network',
+		body: 'DesignReady runs inside Figma. Your designs never leave your machine.',
+		icon: 'lucide:wifi-off',
+	},
+];
+---
+
+<section
+	id="privacy"
+	aria-labelledby="privacy-heading"
+	class="py-section-y"
+>
+	<div class="mx-auto max-w-page px-4 sm:px-6">
+		<div class="flex max-w-prose flex-col gap-4">
+			<h2
+				id="privacy-heading"
+				class="text-3xl font-semibold tracking-tight"
+			>
+				Runs fully offline
+			</h2>
+			<p class="text-lg leading-relaxed text-text-muted">
+				DesignReady works entirely inside Figma. There is nothing to connect
+				and nothing to send.
+			</p>
+		</div>
+
+		<ul class="mt-10 grid gap-6 md:grid-cols-3">
+			{
+				POINTS.map((point) => (
+					<li class="flex flex-col gap-3 rounded-xl border border-border bg-surface-raised p-6">
+						<Icon
+							name={point.icon}
+							class="h-6 w-6 text-success"
+							aria-hidden="true"
+						/>
+						<h3 class="text-lg font-semibold">{point.title}</h3>
+						<p class="text-sm leading-relaxed text-text-muted">
+							{point.body}
+						</p>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>

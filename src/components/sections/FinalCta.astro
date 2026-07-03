@@ -1,0 +1,89 @@
+---
+/**
+ * FinalCta — closing install prompt with optional social proof.
+ * installs/stars are manually maintained; omitted when not provided so no
+ * fabricated numbers ship.
+ */
+import { Icon } from 'astro-icon/components';
+import CtaButton from '../CtaButton.astro';
+import AtomIcon from '../illustrations/AtomIcon.astro';
+import MoleculeIcon from '../illustrations/MoleculeIcon.astro';
+import OrganismIcon from '../illustrations/OrganismIcon.astro';
+
+interface Props {
+	figmaUrl: string;
+	githubUrl: string;
+	/** e.g. "1,200" — Figma Community installs. Omit to hide. */
+	installs?: string;
+	/** e.g. "340" — GitHub stars. Omit to hide. */
+	stars?: string;
+}
+
+const { figmaUrl, githubUrl, installs, stars } = Astro.props;
+const hasProof = Boolean(installs || stars);
+---
+
+<section
+	id="install"
+	aria-labelledby="install-heading"
+	class="py-section-y"
+>
+	<div
+		class="mx-auto flex max-w-page flex-col items-center gap-6 px-4 text-center sm:px-6"
+	>
+		<h2
+			id="install-heading"
+			class="text-3xl font-semibold tracking-tight sm:text-4xl"
+		>
+			Install DesignReady
+		</h2>
+		<p class="max-w-prose text-lg leading-relaxed text-text-muted">
+			Score your next component in minutes. Free, open source, and offline.
+		</p>
+
+		<div class="flex flex-wrap items-center justify-center gap-3">
+			<CtaButton href={figmaUrl} variant="primary" size="lg">
+				Install in Figma
+			</CtaButton>
+			<CtaButton href={githubUrl} variant="ghost" size="lg">
+				View on GitHub
+			</CtaButton>
+		</div>
+
+		{
+			hasProof && (
+				<div class="mt-2 flex flex-wrap items-center justify-center gap-6 text-sm text-text-muted">
+					{installs && (
+						<span class="inline-flex items-center gap-2">
+							<Icon
+								name="lucide:download"
+								class="h-4 w-4"
+								aria-hidden="true"
+							/>
+							{installs} installs on Figma Community
+						</span>
+					)}
+					{stars && (
+						<span class="inline-flex items-center gap-2">
+							<Icon
+								name="lucide:star"
+								class="h-4 w-4"
+								aria-hidden="true"
+							/>
+							{stars} stars on GitHub
+						</span>
+					)}
+				</div>
+			)
+		}
+	</div>
+
+	<div
+		class="mt-section-y flex items-center justify-center gap-6"
+		aria-hidden="true"
+	>
+		<span class="text-atom"><AtomIcon size={28} /></span>
+		<span class="text-molecule"><MoleculeIcon size={28} /></span>
+		<span class="text-organism"><OrganismIcon size={28} /></span>
+	</div>
+</section>

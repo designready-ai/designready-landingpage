@@ -1,0 +1,57 @@
+---
+/**
+ * CtaButton — primary call-to-action link styled as a button.
+ *
+ * Rendered as an <a> because every CTA navigates (Figma install, GitHub).
+ * Token-bound, works in light and dark. Tap target is >= 44px on all sizes.
+ *
+ * @example
+ * <CtaButton href="https://www.figma.com/community/plugin/..." variant="primary">
+ *   Install in Figma
+ * </CtaButton>
+ */
+type CtaVariant = 'primary' | 'ghost';
+type CtaSize = 'md' | 'lg';
+
+interface Props {
+	/** Destination URL. External links get target/rel automatically. */
+	href: string;
+	/** Visual weight. One primary per page, ghost for secondary actions. */
+	variant?: CtaVariant;
+	/** Padding/type scale. Both keep a >= 44px tap target. */
+	size?: CtaSize;
+	/** Force external behavior. Auto-detected from http(s) href otherwise. */
+	external?: boolean;
+}
+
+const { href, variant = 'primary', size = 'md', external } = Astro.props;
+
+const isExternal = external ?? /^https?:\/\//i.test(href);
+const target = isExternal ? '_blank' : undefined;
+const rel = isExternal ? 'noopener noreferrer' : undefined;
+
+const base =
+	'inline-flex items-center justify-center gap-2 min-h-11 rounded-lg font-medium ' +
+	'transition-colors focus-visible:outline-none focus-visible:ring-2 ' +
+	'focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface';
+
+const variantClass: Record<CtaVariant, string> = {
+	primary: 'bg-brand text-white hover:bg-brand/90',
+	ghost:
+		'border border-border bg-transparent text-text hover:border-brand hover:text-brand',
+};
+
+const sizeClass: Record<CtaSize, string> = {
+	md: 'px-5 text-sm',
+	lg: 'px-7 text-base',
+};
+---
+
+<a
+	href={href}
+	target={target}
+	rel={rel}
+	class:list={[base, variantClass[variant], sizeClass[size]]}
+>
+	<slot />
+</a>

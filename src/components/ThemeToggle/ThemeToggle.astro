@@ -1,12 +1,19 @@
 ---
+import { Icon } from 'astro-icon/components';
 ---
 
 <button
 	id="theme-toggle"
 	type="button"
-	class="px-3 py-1.5 rounded-md border border-border bg-surface-raised text-text-muted hover:text-text hover:border-brand transition-colors text-sm font-medium"
+	class="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-border bg-surface-raised px-3 text-sm font-medium text-text-muted transition-colors hover:border-brand hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
 	aria-label="Toggle color theme"
 >
+	<span id="theme-icon-dark" class="inline-flex" hidden>
+		<Icon name="lucide:moon" class="h-4 w-4" aria-hidden="true" />
+	</span>
+	<span id="theme-icon-light" class="inline-flex" hidden>
+		<Icon name="lucide:sun" class="h-4 w-4" aria-hidden="true" />
+	</span>
 	<span id="theme-label">…</span>
 </button>
 
@@ -14,9 +21,14 @@
 	(() => {
 		const btn = document.getElementById('theme-toggle');
 		const label = document.getElementById('theme-label');
-		if (!btn || !label) return;
+		const iconDark = document.getElementById('theme-icon-dark');
+		const iconLight = document.getElementById('theme-icon-light');
+		if (!btn || !label || !iconDark || !iconLight) return;
 		const render = () => {
-			label.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? 'Dark' : 'Light';
+			const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+			label.textContent = isDark ? 'Dark' : 'Light';
+			iconDark.hidden = !isDark;
+			iconLight.hidden = isDark;
 		};
 		render();
 		btn.addEventListener('click', () => {

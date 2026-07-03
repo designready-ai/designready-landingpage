@@ -1,0 +1,48 @@
+---
+import Legal from '../layouts/Legal.astro';
+---
+
+<Legal
+	title="Legal notice"
+	description="Legal notice (Impressum) for the DesignReady landing page."
+>
+	<p>
+		Information according to section 5 TMG. This is placeholder content and
+		must be completed with the real details before the site goes live.
+	</p>
+
+	<section class="flex flex-col gap-2">
+		<h2 class="text-lg font-semibold text-text">Responsible for content</h2>
+		<p>
+			[Full name]<br />
+			[Street and number]<br />
+			[Postal code and city]<br />
+			[Country]
+		</p>
+	</section>
+
+	<section class="flex flex-col gap-2">
+		<h2 class="text-lg font-semibold text-text">Contact</h2>
+		<p>
+			Email: <a
+				href="mailto:design@stefan-holzheu.de"
+				class="text-brand hover:underline">design@stefan-holzheu.de</a
+			>
+		</p>
+	</section>
+
+	<section class="flex flex-col gap-2">
+		<h2 class="text-lg font-semibold text-text">
+			Responsible per section 18 (2) MStV
+		</h2>
+		<p>
+			[Full name]<br />
+			[Address as above]
+		</p>
+	</section>
+
+	<p class="text-sm">
+		DesignReady is an open source project released under the MIT license. The
+		plugin source is available on GitHub.
+	</p>
+</Legal>

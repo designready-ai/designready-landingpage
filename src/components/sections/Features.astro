@@ -1,0 +1,90 @@
+---
+/**
+ * Features — 6-card bento with a 16:9 showcase. Copy grounded in the GitHub README.
+ * Functional icons via Lucide (astro-icon), token-colored.
+ */
+import { Icon } from 'astro-icon/components';
+import MediaPlaceholder from '../MediaPlaceholder.astro';
+
+interface Feature {
+	title: string;
+	body: string;
+	icon: string;
+}
+
+const FEATURES: Feature[] = [
+	{
+		title: 'Score & Fix',
+		body: 'Detailed scoring with one-click quick fixes: auto-rename layers, divider conversion, and removal of hidden or empty nodes.',
+		icon: 'lucide:gauge',
+	},
+	{
+		title: 'Auto Layout Fixes',
+		body: 'Confidence-based analysis with one-click apply. It works bottom-up, skips icons and overlaps, and lists low-confidence frames with reasons.',
+		icon: 'lucide:layout-dashboard',
+	},
+	{
+		title: 'Batch Mode',
+		body: 'Analyze many components at once in atomic build order: atoms first, then molecules, then organisms.',
+		icon: 'lucide:layers',
+	},
+	{
+		title: 'Skill Sync',
+		body: 'The generated prompt can create or update a skill file, so your design system documentation keeps improving over time.',
+		icon: 'lucide:refresh-cw',
+	},
+	{
+		title: 'Design System Profiles',
+		body: 'Import tokens from Figma Variables, paint styles, or local components to score against your own system.',
+		icon: 'lucide:palette',
+	},
+	{
+		title: 'Prompt Generation',
+		body: 'Token-optimized prompts with the full component spec, a self-check block, and state hints. Ready at score 75, or 60 in batch.',
+		icon: 'lucide:sparkles',
+	},
+];
+---
+
+<section
+	id="features"
+	aria-labelledby="features-heading"
+	class="bg-surface-raised py-section-y"
+>
+	<div class="mx-auto max-w-page px-4 sm:px-6">
+		<h2
+			id="features-heading"
+			class="text-3xl font-semibold tracking-tight"
+		>
+			What DesignReady does
+		</h2>
+		<p class="mt-3 max-w-prose text-lg text-text-muted">
+			Six capabilities that take a component from rough to ready.
+		</p>
+
+		<div class="mt-10">
+			<MediaPlaceholder
+				aspect="16/9"
+				label="Score panel and per-dimension breakdown"
+			/>
+		</div>
+
+		<ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+			{
+				FEATURES.map((feature) => (
+					<li class="flex flex-col gap-3 rounded-xl border border-border bg-surface p-6">
+						<Icon
+							name={feature.icon}
+							class="h-6 w-6 text-brand"
+							aria-hidden="true"
+						/>
+						<h3 class="text-lg font-semibold">{feature.title}</h3>
+						<p class="text-sm leading-relaxed text-text-muted">
+							{feature.body}
+						</p>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>

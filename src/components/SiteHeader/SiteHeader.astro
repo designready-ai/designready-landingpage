@@ -1,0 +1,125 @@
+---
+/**
+ * SiteHeader — full-width sticky header with anchor nav, theme toggle and CTA.
+ *
+ * Desktop shows inline nav links; mobile collapses them into a <details> menu
+ * (no JS framework). A small inline IntersectionObserver highlights the nav
+ * link for the section currently in view (scroll-spy).
+ */
+import { Icon } from 'astro-icon/components';
+import ThemeToggle from '../ThemeToggle/ThemeToggle.astro';
+import CtaButton from '../CtaButton.astro';
+
+const FIGMA_URL =
+	'https://www.figma.com/community/plugin/1619643293052051000/designready-ai';
+
+interface NavItem {
+	label: string;
+	id: string;
+}
+
+const NAV: NavItem[] = [
+	{ label: 'How it works', id: 'how-it-works' },
+	{ label: 'Features', id: 'features' },
+	{ label: 'Privacy', id: 'privacy' },
+	{ label: 'Open Source', id: 'open-source' },
+];
+
+const linkBase =
+	'text-sm font-medium text-text-muted hover:text-brand transition-colors';
+---
+
+<header
+	class="sticky top-0 z-40 border-b border-border bg-surface/90 backdrop-blur"
+>
+	<div
+		class="mx-auto flex max-w-page items-center justify-between gap-4 px-4 py-3 sm:px-6"
+	>
+		<a
+			href="/#top"
+			class="text-base font-bold tracking-tight text-text hover:text-brand transition-colors"
+		>
+			Design<span class="text-brand">Ready</span>
+		</a>
+
+		<nav aria-label="Primary" class="hidden items-center gap-6 md:flex">
+			{
+				NAV.map((item) => (
+					<a href={`/#${item.id}`} data-navlink={item.id} class={linkBase}>
+						{item.label}
+					</a>
+				))
+			}
+		</nav>
+
+		<div class="flex items-center gap-2 sm:gap-3">
+			<ThemeToggle />
+			<div class="hidden sm:block">
+				<CtaButton href={FIGMA_URL} variant="primary" size="md">
+					Install in Figma
+				</CtaButton>
+			</div>
+
+			<details class="relative md:hidden">
+				<summary
+					class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-border text-text-muted hover:text-brand hover:border-brand transition-colors"
+					aria-label="Open menu"
+				>
+					<Icon name="lucide:menu" class="h-5 w-5" aria-hidden="true" />
+				</summary>
+				<nav
+					aria-label="Mobile"
+					class="absolute right-0 mt-2 flex w-56 flex-col gap-1 rounded-lg border border-border bg-surface-raised p-2 shadow-lg"
+				>
+					{
+						NAV.map((item) => (
+							<a
+								href={`/#${item.id}`}
+								class="rounded-md px-3 py-2 text-sm font-medium text-text-muted hover:bg-surface hover:text-brand transition-colors"
+							>
+								{item.label}
+							</a>
+						))
+					}
+					<div class="mt-1 border-t border-border pt-2">
+						<CtaButton href={FIGMA_URL} variant="primary" size="md">
+							Install in Figma
+						</CtaButton>
+					</div>
+				</nav>
+			</details>
+		</div>
+	</div>
+</header>
+
+<script is:inline>
+	(() => {
+		const links = Array.from(document.querySelectorAll('[data-navlink]'));
+		if (!links.length) return;
+
+		const setActive = (id) => {
+			links.forEach((link) => {
+				const on = link.getAttribute('data-navlink') === id;
+				link.classList.toggle('text-brand', on);
+				link.classList.toggle('text-text-muted', !on);
+				if (on) link.setAttribute('aria-current', 'true');
+				else link.removeAttribute('aria-current');
+			});
+		};
+
+		const sections = links
+			.map((link) => document.getElementById(link.getAttribute('data-navlink')))
+			.filter((el) => el !== null);
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) setActive(entry.target.id);
+				});
+			},
+			{ rootMargin: '-40% 0px -55% 0px', threshold: 0 },
+		);
+
+		sections.forEach((section) => observer.observe(section));
+	})();
+</script>

@@ -27,6 +27,16 @@
   --color-border:         #d0d7de;
   --color-text:           #0d1117;
   --color-text-muted:     #6b7280;
+
+  /* ─── Semantic / Layout tokens (use-case-driven) ─── */
+  --color-ring:        #18a0fb;   /* Focus-visible ring, brand-tinted → ring-ring */
+  --container-page:    72rem;     /* Consistent site width → max-w-page */
+  --spacing-section-y: 6rem;      /* Vertical section rhythm → py-section-y */
+  --scroll-offset:     5rem;      /* Sticky-header anchor offset (scroll-margin-top) */
+
+  /* Aspect ratios not covered by Tailwind built-ins (square = 1/1, video = 16/9) */
+  --aspect-portrait:   3 / 4;     /* → aspect-portrait */
+  --aspect-landscape:  4 / 3;     /* → aspect-landscape */
 }
 
 /* ─── Dark Override ─── */
@@ -36,4 +46,38 @@
   --color-border:         #30363d;
   --color-text:           #e0e0e0;
   --color-text-muted:     #8b949e;
+}
+
+/* ─── Anchor / scroll behavior (sticky-header offset) ─── */
+html {
+  scroll-behavior: smooth;
+}
+
+:where(section[id]) {
+  scroll-margin-top: var(--scroll-offset);
+}
+
+/* ─── <details> mobile menu: drop the default disclosure marker ─── */
+summary {
+  list-style: none;
+  cursor: pointer;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* ─── Reduced motion: kill scroll-smooth + transitions/animations ─── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -1,4 +1,8 @@
 ---
+// Scratch / preview page.
+// Reachable in production but kept out of search: carries noindex and is
+// excluded from the sitemap (astro.config.mjs). Safe to experiment here
+// without touching index.astro.
 import Base from '../layouts/Base.astro';
 import Hero from '../components/sections/Hero.astro';
 import ProblemSection from '../components/sections/ProblemSection.astro';
@@ -17,8 +21,9 @@ const PERSONAL_URL = 'https://stefan-holzheu.de';
 ---
 
 <Base
-	title="DesignReady"
-	titleOverride="DesignReady — AI-Readiness Scoring for Figma"
+	title="Preview"
+	titleOverride="Preview — DesignReady"
+	noindex
 >
 	<Hero figmaUrl={FIGMA_URL} githubUrl={GITHUB_URL} />
 	<ProblemSection />

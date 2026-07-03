@@ -1,24 +1,31 @@
 ---
-import ThemeToggle from '../components/ThemeToggle/ThemeToggle.astro';
+import SiteHeader from '../components/SiteHeader/SiteHeader.astro';
 import '../styles/global.css';
 
 interface Props {
 	title: string;
 	description?: string;
 	ogImage?: string;
+	/** Used verbatim as <title>, bypassing the "— DesignReady" suffix. */
+	titleOverride?: string;
+	/** Emit a robots noindex meta (e.g. scratch/preview pages). */
+	noindex?: boolean;
 }
 
 const SITE_NAME = 'DesignReady';
 const DEFAULT_DESCRIPTION =
-	'DesignReady — bewertet Figma-Designs auf Maschinenlesbarkeit für KI-gestützte Code-Generierung.';
+	'Figma plugin that scores your designs for AI-readiness in six dimensions, fixes common issues, and generates code prompts. Fully offline.';
 
 const {
 	title,
 	description = DEFAULT_DESCRIPTION,
 	ogImage = '/og-default.png',
+	titleOverride,
+	noindex = false,
 } = Astro.props;
 
-const fullTitle = title === SITE_NAME ? SITE_NAME : `${title} — ${SITE_NAME}`;
+const fullTitle =
+	titleOverride ?? (title === SITE_NAME ? SITE_NAME : `${title} — ${SITE_NAME}`);
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
 const ogImageUrl = new URL(ogImage, Astro.site).toString();
 ---
@@ -32,6 +39,7 @@ const ogImageUrl = new URL(ogImage, Astro.site).toString();
 
 		<title>{fullTitle}</title>
 		<meta name="description" content={description} />
+		{noindex && <meta name="robots" content="noindex" />}
 		<link rel="canonical" href={canonicalUrl} />
 
 		<meta property="og:type" content="website" />
@@ -65,9 +73,7 @@ const ogImageUrl = new URL(ogImage, Astro.site).toString();
 			Skip to content
 		</a>
 
-		<header class="fixed top-0 right-0 p-4 z-10">
-			<ThemeToggle />
-		</header>
+		<SiteHeader />
 
 		<main id="main">
 			<slot />

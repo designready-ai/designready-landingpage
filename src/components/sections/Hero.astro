@@ -1,0 +1,51 @@
+---
+/**
+ * Hero — top section. Headline, subtext, primary + ghost CTA, 3:4 preview panel.
+ */
+import CtaButton from '../CtaButton.astro';
+import MediaPlaceholder from '../MediaPlaceholder.astro';
+
+interface Props {
+	figmaUrl: string;
+	githubUrl: string;
+}
+
+const { figmaUrl, githubUrl } = Astro.props;
+---
+
+<section
+	id="top"
+	aria-labelledby="hero-heading"
+	class="py-section-y"
+>
+	<div
+		class="mx-auto grid max-w-page items-center gap-12 px-4 sm:px-6 md:grid-cols-2"
+	>
+		<div class="flex flex-col gap-6">
+			<h1
+				id="hero-heading"
+				class="text-4xl font-bold tracking-tight sm:text-5xl"
+			>
+				Make your Figma designs
+				<span class="block text-brand">AI-ready.</span>
+			</h1>
+			<p class="max-w-prose text-lg leading-relaxed text-text-muted">
+				DesignReady scores your components across six dimensions, fixes
+				common issues, and generates structured code prompts. It runs fully
+				offline, with no accounts and no API keys.
+			</p>
+			<div class="flex flex-wrap items-center gap-3">
+				<CtaButton href={figmaUrl} variant="primary" size="lg">
+					Install in Figma
+				</CtaButton>
+				<CtaButton href={githubUrl} variant="ghost" size="lg">
+					View on GitHub
+				</CtaButton>
+			</div>
+		</div>
+
+		<div class="mx-auto w-full max-w-sm">
+			<MediaPlaceholder aspect="3/4" label="Score panel preview" />
+		</div>
+	</div>
+</section>
