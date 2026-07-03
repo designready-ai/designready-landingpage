@@ -33,10 +33,6 @@
   --container-page:    72rem;     /* Consistent site width → max-w-page */
   --spacing-section-y: 6rem;      /* Vertical section rhythm → py-section-y */
   --scroll-offset:     5rem;      /* Sticky-header anchor offset (scroll-margin-top) */
-
-  /* Aspect ratios not covered by Tailwind built-ins (square = 1/1, video = 16/9) */
-  --aspect-portrait:   3 / 4;     /* → aspect-portrait */
-  --aspect-landscape:  4 / 3;     /* → aspect-landscape */
 }
 
 /* ─── Dark Override ─── */

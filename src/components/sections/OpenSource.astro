@@ -3,8 +3,9 @@
  * OpenSource — MIT license + Star on GitHub. Includes a 4:3 repo preview.
  */
 import { Icon } from 'astro-icon/components';
+import { Picture } from 'astro:assets';
 import CtaButton from '../CtaButton.astro';
-import MediaPlaceholder from '../MediaPlaceholder.astro';
+import repoPreview from '../../assets/opensource-repo.png';
 
 interface Props {
 	githubUrl: string;
@@ -47,7 +48,15 @@ const { githubUrl } = Astro.props;
 		</div>
 
 		<div class="mx-auto w-full max-w-md">
-			<MediaPlaceholder aspect="4/3" label="Repository preview" />
+			<Picture
+				src={repoPreview}
+				formats={['avif', 'webp']}
+				alt="The DesignReady GitHub repository: MIT license, 15 stars, source folders, and the project description"
+				widths={[448, 896]}
+				sizes="448px"
+				loading="lazy"
+				class="h-auto w-full rounded-xl border border-border"
+			/>
 		</div>
 	</div>
 </section>
