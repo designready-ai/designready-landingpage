@@ -55,7 +55,26 @@ const { figmaUrl, githubUrl } = Astro.props;
 				loading="eager"
 				fetchpriority="high"
 				class="h-auto w-full rounded-xl border border-border"
+				data-parallax
 			/>
 		</div>
 	</div>
 </section>
+
+<script>
+	import { animate } from 'motion/mini';
+	import { scroll } from 'motion';
+
+	// Subtle scroll-linked parallax on the hero panel — GPU-driven via
+	// ScrollTimeline where available, callback fallback otherwise. Skipped
+	// entirely for reduced motion.
+	if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+		const panel = document.querySelector('[data-parallax]');
+		if (panel) {
+			scroll(animate(panel, { y: [18, -18] }, { ease: 'linear' }), {
+				target: panel,
+				offset: ['start end', 'end start'],
+			});
+		}
+	}
+</script>
