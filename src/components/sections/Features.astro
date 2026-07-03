@@ -4,7 +4,8 @@
  * Functional icons via Lucide (astro-icon), token-colored.
  */
 import { Icon } from 'astro-icon/components';
-import MediaPlaceholder from '../MediaPlaceholder.astro';
+import { Picture } from 'astro:assets';
+import keyvisual from '../../assets/features-keyvisual.png';
 
 interface Feature {
 	title: string;
@@ -63,9 +64,14 @@ const FEATURES: Feature[] = [
 		</p>
 
 		<div class="mt-10">
-			<MediaPlaceholder
-				aspect="16/9"
-				label="Score panel and per-dimension breakdown"
+			<Picture
+				src={keyvisual}
+				formats={['avif', 'webp']}
+				alt="DesignReady Figma plugin: a Scan to Fix to Prompt flow next to the scan panel showing an AI-readiness score, quick fixes, token coverage, and a component export plan"
+				widths={[768, 1152, 1920]}
+				sizes="(min-width: 1200px) 1152px, 100vw"
+				loading="lazy"
+				class="h-auto w-full rounded-xl border border-border"
 			/>
 		</div>
 
