@@ -2,8 +2,9 @@
 /**
  * Hero — top section. Headline, subtext, primary + ghost CTA, 3:4 preview panel.
  */
+import { Picture } from 'astro:assets';
 import CtaButton from '../CtaButton.astro';
-import MediaPlaceholder from '../MediaPlaceholder.astro';
+import scorePanel from '../../assets/score-panel-overview.png';
 
 interface Props {
 	figmaUrl: string;
@@ -45,7 +46,16 @@ const { figmaUrl, githubUrl } = Astro.props;
 		</div>
 
 		<div class="mx-auto w-full max-w-sm">
-			<MediaPlaceholder aspect="3/4" label="Score panel preview" />
+			<Picture
+				src={scorePanel}
+				formats={['avif', 'webp']}
+				alt="DesignReady scan panel: an 87 AI-readiness score with a per-dimension breakdown, token coverage, auto layout fixes, and a component export plan"
+				widths={[384, 768]}
+				sizes="384px"
+				loading="eager"
+				fetchpriority="high"
+				class="h-auto w-full rounded-xl border border-border"
+			/>
 		</div>
 	</div>
 </section>
