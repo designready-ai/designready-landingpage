@@ -56,14 +56,15 @@ const FEATURES: Feature[] = [
 		<h2
 			id="features-heading"
 			class="text-3xl font-semibold tracking-tight"
+			data-reveal
 		>
 			What DesignReady does
 		</h2>
-		<p class="mt-3 max-w-prose text-lg text-text-muted">
+		<p class="mt-3 max-w-prose text-lg text-text-muted" data-reveal>
 			Six capabilities that take a component from rough to ready.
 		</p>
 
-		<div class="mt-10">
+		<div class="mt-10" data-reveal>
 			<Picture
 				src={keyvisual}
 				formats={['avif', 'webp']}
@@ -75,10 +76,10 @@ const FEATURES: Feature[] = [
 			/>
 		</div>
 
-		<ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+		<ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-reveal-stagger>
 			{
 				FEATURES.map((feature) => (
-					<li class="flex flex-col gap-3 rounded-xl border border-border bg-surface p-6">
+					<li class="flex flex-col gap-3 rounded-xl border border-border bg-surface p-6 transition-[box-shadow,border-color] duration-300 ease-lux hover:border-brand/40 hover:shadow-md">
 						<Icon
 							name={feature.icon}
 							class="h-6 w-6 text-brand"

@@ -35,7 +35,7 @@ const POINTS: Point[] = [
 	class="py-section-y"
 >
 	<div class="mx-auto max-w-page px-4 sm:px-6">
-		<div class="flex max-w-prose flex-col gap-4">
+		<div class="flex max-w-prose flex-col gap-4" data-reveal>
 			<h2
 				id="privacy-heading"
 				class="text-3xl font-semibold tracking-tight"
@@ -48,10 +48,10 @@ const POINTS: Point[] = [
 			</p>
 		</div>
 
-		<ul class="mt-10 grid gap-6 md:grid-cols-3">
+		<ul class="mt-10 grid gap-6 md:grid-cols-3" data-reveal-stagger>
 			{
 				POINTS.map((point) => (
-					<li class="flex flex-col gap-3 rounded-xl border border-border bg-surface-raised p-6">
+					<li class="flex flex-col gap-3 rounded-xl border border-border bg-surface-raised p-6 transition-[box-shadow,border-color] duration-300 ease-lux hover:border-brand/40 hover:shadow-md">
 						<Icon
 							name={point.icon}
 							class="h-6 w-6 text-success"

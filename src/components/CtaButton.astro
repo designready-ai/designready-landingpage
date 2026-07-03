@@ -32,11 +32,12 @@ const rel = isExternal ? 'noopener noreferrer' : undefined;
 
 const base =
 	'inline-flex items-center justify-center gap-2 min-h-11 rounded-lg font-medium ' +
-	'transition-colors focus-visible:outline-none focus-visible:ring-2 ' +
+	'transition-[color,background-color,border-color,box-shadow,transform] duration-300 ease-lux ' +
+	'motion-safe:hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 ' +
 	'focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface';
 
 const variantClass: Record<CtaVariant, string> = {
-	primary: 'bg-brand text-white hover:bg-brand/90',
+	primary: 'bg-brand text-white hover:bg-brand/90 hover:shadow-lg',
 	ghost:
 		'border border-border bg-transparent text-text hover:border-brand hover:text-brand',
 };

@@ -32,6 +32,11 @@
   --container-page:    72rem;     /* Consistent site width → max-w-page */
   --spacing-section-y: 6rem;      /* Vertical section rhythm → py-section-y */
   --scroll-offset:     5rem;      /* Sticky-header anchor offset (scroll-margin-top) */
+
+  /* ─── Motion (subtle, premium) ─── */
+  --ease-lux:          cubic-bezier(0.16, 1, 0.3, 1);  /* → ease-lux utility */
+  --motion-rise:       1rem;      /* Entrance travel — small on purpose */
+  --motion-duration:   0.7s;      /* Slow enough to feel smooth, not sluggish */
 }
 
 /* ─── Dark Override ─── */
@@ -61,6 +66,51 @@ summary::-webkit-details-marker {
   display: none;
 }
 
+/* ─── Scroll-reveal + hero choreography ───────────────────────────────
+   Gated on the `.motion` class, which is only added (in <head>) when JS
+   runs AND the user has no reduced-motion preference. Without it, every
+   element renders fully visible — no JS, no motion, no hidden content. */
+
+/* Single element rises + fades in when it enters the viewport. */
+.motion [data-reveal] {
+  opacity: 0;
+  transform: translateY(var(--motion-rise));
+  transition:
+    opacity var(--motion-duration) var(--ease-lux),
+    transform var(--motion-duration) var(--ease-lux);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.motion [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Staggered group: the container is only a trigger; its children rise in
+   sequence for a calm, deliberate cascade. */
+.motion [data-reveal-stagger] > * {
+  opacity: 0;
+  transform: translateY(var(--motion-rise));
+  transition:
+    opacity var(--motion-duration) var(--ease-lux),
+    transform var(--motion-duration) var(--ease-lux);
+}
+.motion [data-reveal-stagger].is-visible > * {
+  opacity: 1;
+  transform: none;
+}
+.motion [data-reveal-stagger].is-visible > *:nth-child(1) { transition-delay: 0ms; }
+.motion [data-reveal-stagger].is-visible > *:nth-child(2) { transition-delay: 70ms; }
+.motion [data-reveal-stagger].is-visible > *:nth-child(3) { transition-delay: 140ms; }
+.motion [data-reveal-stagger].is-visible > *:nth-child(4) { transition-delay: 210ms; }
+.motion [data-reveal-stagger].is-visible > *:nth-child(5) { transition-delay: 280ms; }
+.motion [data-reveal-stagger].is-visible > *:nth-child(6) { transition-delay: 350ms; }
+
+/* ─── Page transitions: subtle native cross-document cross-fade ───────
+   Chrome/Edge honor this; other browsers just navigate normally. */
+@view-transition {
+  navigation: auto;
+}
+
 /* ─── Reduced motion: kill scroll-smooth + transitions/animations ─── */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -74,5 +124,9 @@ summary::-webkit-details-marker {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  @view-transition {
+    navigation: none;
   }
 }
