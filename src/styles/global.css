@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "@fontsource-variable/inter";
 
 @theme {
   /* ─── Brand (Plugin-konsistent) ─── */
@@ -18,7 +17,7 @@
   --color-variants:     #ff6b9d;
 
   /* ─── Typography ─── */
-  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter, ui-sans-serif, system-ui, sans-serif);
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Monaco, monospace;
 
   /* ─── Surfaces (Light = Default) ─── */

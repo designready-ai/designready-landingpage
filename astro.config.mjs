@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
 import sitemap from '@astrojs/sitemap';
@@ -17,6 +17,26 @@ export default defineConfig({
           new URL(page).pathname.startsWith(route),
         ),
     }),
+  ],
+  fonts: [
+    {
+      provider: fontProviders.local(),
+      name: 'Inter',
+      cssVariable: '--font-inter',
+      display: 'swap',
+      // Metric-matched fallback is derived from the actual file → no reflow.
+      fallbacks: ['ui-sans-serif', 'system-ui', 'sans-serif'],
+      optimizedFallbacks: true,
+      options: {
+        variants: [
+          {
+            weight: '100 900',
+            style: 'normal',
+            src: ['./src/assets/fonts/inter-latin-wght-normal.woff2'],
+          },
+        ],
+      },
+    },
   ],
   vite: {
     plugins: [tailwindcss()],
